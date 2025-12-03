@@ -5,6 +5,7 @@
 #Abrir una terminal y ejecutar los codigos
 git clone https://github.com/rbrandenberg-art/FS_3_final.git
 ----------------------------------------------------------------------------------------
+cd EjercicioMod
 cd backEnd/
 ./mvnw spring-boot:run
 #Abrir un programa para ejecutar las acciones del backend (para visual usar thunder client, postman)
