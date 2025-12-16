@@ -1,55 +1,71 @@
 const API_URL = 'http://localhost:8080/api/books';
 
 // --- FUNCIÓN PARA LISTAR (GET) ---
-const listarLibros = async () => {
-    const cuerpoTabla = document.getElementById('cuerpoTabla');
+async function listarLibros() {
+    const cuerpo = document.getElementById('cuerpoTabla');
     try {
-        const response = await fetch(API_URL);
-        const libros = await response.json();
-        cuerpoTabla.innerHTML = "";
-        libros.forEach(libro => {
+        const resp = await fetch(API_URL);
+        const libros = await resp.json();
+        
+        cuerpo.innerHTML = ""; 
+        libros.forEach(l => {
             const fila = document.createElement('tr');
-            fila.innerHTML = `<td>${libro.id}</td><td>${libro.title}</td><td>${libro.author}</td>`;
-            cuerpoTabla.appendChild(fila);
+            fila.innerHTML = `
+                <td>${l.id}</td>
+                <td>${l.title}</td>
+                <td>${l.author}</td>
+                <td class="text-center">
+                    <button class="btn-delete" onclick="eliminarLibro(${l.id})">Eliminar</button>
+                </td>
+            `;
+            cuerpo.appendChild(fila);
         });
-    } catch (error) {
-        console.error("Error al listar:", error);
+    } catch (e) {
+        console.error("Error al listar:", e);
     }
-};
+}
 
-// --- FUNCIÓN PARA GUARDAR (POST) ---
+// --- FUNCIÓN PARA ELIMINAR (DELETE) ---
+async function eliminarLibro(id) {
+    if (!confirm("¿Estás seguro de que deseas eliminar este libro?")) return;
+
+    try {
+        const resp = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (resp.ok) {
+            listarLibros(); // Refrescar la tabla después de borrar
+        } else {
+            alert("No se pudo eliminar el libro");
+        }
+    } catch (e) {
+        console.error("Error al eliminar:", e);
+    }
+}
+
+// --- LÓGICA PARA GUARDAR (POST) ---
 document.getElementById('btnGuardar').addEventListener('click', async () => {
     const title = document.getElementById('titulo').value;
     const author = document.getElementById('autor').value;
 
-    if (!title || !author) {
-        alert("Por favor, completa ambos campos");
-        return;
-    }
-
-    const nuevoLibro = { title, author };
+    if (!title || !author) return alert("Completa los campos");
 
     try {
-        const response = await fetch(API_URL, {
+        await fetch(API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(nuevoLibro)
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ title, author })
         });
-
-        if (response.ok) {
-            // Limpiar inputs
-            document.getElementById('titulo').value = "";
-            document.getElementById('autor').value = "";
-            // Refrescar la tabla automáticamente
-            listarLibros();
-        }
-    } catch (error) {
-        console.error("Error al guardar:", error);
+        
+        document.getElementById('titulo').value = "";
+        document.getElementById('autor').value = "";
+        listarLibros();
+        
+    } catch (e) {
+        alert("Error al guardar");
     }
 });
 
-// Botón de actualizar
 document.getElementById('btnListar').addEventListener('click', listarLibros);
-
-// Cargar datos al abrir la página por primera vez
-//listarLibros();
+listarLibros();
