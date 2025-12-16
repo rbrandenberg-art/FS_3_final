@@ -1,0 +1,70 @@
+/* Estilos Base */
+body { 
+    font-family: sans-serif; 
+    padding: 20px; 
+    background-color: #f9f9f9;
+}
+
+h1, h2 { color: #333; }
+
+/* Contenedor del Formulario */
+.form-container {
+    background: white;
+    padding: 20px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.form-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+}
+
+/* Tabla Estilo Esmeralda */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879; /* Verde sugerido */
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Botones Estilo Azul */
+.btn-primary, .btn-success {
+    background-color: #008CBA; /* Azul sugerido */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover, .btn-success:hover { 
+    background-color: #007399; 
+}
+
+/* Espaciado para el botón de listar */
+.actions { margin-top: 20px; }

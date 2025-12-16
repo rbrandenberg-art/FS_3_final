@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de libros</title>
+    <link href="https://unpkg.com/vis-timeline/styles/dist/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>📚 Panel de Control de Libros</h1>
+    
+    <div class="form-container">
+        <h2>Añadir Nuevo Libro</h2>
+        <div class="form-group">
+            <input type="text" id="titulo" placeholder="Título del libro">
+            <input type="text" id="autor" placeholder="Nombre del autor">
+            <button id="btnGuardar" class="btn-success">Guardar Libro</button>
+        </div>
+    </div>
+    <button id="btnListar" class="btn-primary">Listar Libros</button>
+
+    <table id="tablaLibros" class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título del Libro</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+            </tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
